@@ -4,6 +4,7 @@ import { Document } from './document';
 @Component({
   selector: 'document',
   templateUrl: 'documents.component.html',
+  styleUrls: ['documents.component.css']
 })
 export class DocumentsComponent {
   pageTitle: string = 'Document Dashboard';
