@@ -13,21 +13,21 @@ export class DocumentsComponent {
       description: 'First Doc description',
       file_url: 'http://google.com',
       updated_at: '11/11/16',
-      image_url: 'http://google.com',
+      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
     {
       title: 'Second Document',
       description: 'Second Doc description',
       file_url: 'http://google.com',
       updated_at: '11/11/16',
-      image_url: 'http://google.com',
+      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
     {
       title: 'Third Document',
       description: 'Third Doc description',
       file_url: 'http://google.com',
       updated_at: '11/11/16',
-      image_url: 'http://google.com',
+      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     },
   ];
 }
