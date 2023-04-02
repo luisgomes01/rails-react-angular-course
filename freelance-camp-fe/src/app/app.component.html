@@ -2,10 +2,14 @@
   <div class="container">
     <ul class="nav navbar-nav d-flex flex-row gap-3">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/home">Home</a>
+        <a class="nav-link" routerLink="/home" routerLinkActive="active"
+          >Home</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/documents">Docs</a>
+        <a class="nav-link" routerLink="/documents" routerLinkActive="active"
+          >Docs</a
+        >
       </li>
       <li class="nav-item dropdown">
         <div ngbDropdown class="d-inline-block dropdown-links">
@@ -22,8 +26,17 @@
             ngbDropdownMenu
             style="z-index: 1"
           >
-            <a class="dropdown-item" routerLink="/proposals">Proposals</a>
-            <a class="dropdown-item" routerLink="/proposals/new"
+            <a
+              class="dropdown-item"
+              routerLink="/proposals"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Proposals</a
+            >
+            <a
+              class="dropdown-item"
+              routerLink="/proposals/new"
+              routerLinkActive="active"
               >New Proposal</a
             >
           </div>
