@@ -1,34 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Document } from './document';
+import { DocumentService } from './document.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'document',
   templateUrl: 'documents.component.html',
-  styleUrls: ['documents.component.css']
+  styleUrls: ['documents.component.css'],
 })
-export class DocumentsComponent {
+
+export class DocumentsComponent implements OnInit {
   pageTitle: string = 'Document Dashboard';
-  documents: Document[] = [
-    {
-      title: 'First Document',
-      description: 'First Doc description',
-      file_url: 'http://google.com',
-      updated_at: '11/11/16',
-      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    },
-    {
-      title: 'Second Document',
-      description: 'Second Doc description',
-      file_url: 'http://google.com',
-      updated_at: '11/11/16',
-      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    },
-    {
-      title: 'Third Document',
-      description: 'Third Doc description',
-      file_url: 'http://google.com',
-      updated_at: '11/11/16',
-      image_url: 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    },
-  ];
+  documents: Document[] = [];
+  errorMessage: string;
+
+  constructor(private documentService: DocumentService) {}
+
+  ngOnInit(): void {
+    const interval = timer(0, 5000);
+    interval.subscribe(() => this.getDocuments());
+  }
+
+  getDocuments() {
+    this.documentService.getDocuments().subscribe({
+      next: (documents) => (this.documents = documents),
+      error: (error) => (this.errorMessage = <any>error),
+    });
+  }
 }
