@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_07_153008) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_15_163422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "freelance_documents", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.text "file_url"
-    t.text "image_url"
+  create_table "proposals", force: :cascade do |t|
+    t.string "customer"
+    t.string "portfolio_url"
+    t.string "tools"
+    t.decimal "estimated_hours"
+    t.decimal "hourly_rate"
+    t.integer "weeks_to_complete"
+    t.string "client_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
