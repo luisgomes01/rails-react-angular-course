@@ -1,48 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Proposal } from './proposal';
+import { ProposalService } from './proposal.service';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'proposal-list',
   templateUrl: './proposal-list.component.html',
 })
+export class ProposalListComponent implements OnInit {
+  proposals: Proposal[] = [];
+  errorMessage: string;
 
-export class ProposalListComponent {
-  proposalOne: Proposal = new Proposal(
-    15,
-    'Proposal One',
-    'http://portfolio.jordanhudgens.com',
-    'Ruby on Rails',
-    150,
-    120,
-    15,
-    'luisgomes@dev.com'
-  );
+  constructor(private proposalService: ProposalService) {}
 
-  proposalTwo: Proposal = new Proposal(
-    10,
-    'Proposal Two',
-    'http://portfolio.jordanhudgens.com',
-    'Ruby on Rails',
-    100,
-    122,
-    18,
-    'luisgomes@dev.com'
-  );
+  ngOnInit(): void {
+    const interval = timer(0, 5000);
+    interval.subscribe(() => this.getProposals());
+  }
 
-  proposalThree: Proposal = new Proposal(
-    22,
-    'Proposal Three',
-    'http://portfolio.jordanhudgens.com',
-    'Ruby on Rails',
-    130,
-    111,
-    9,
-    'luisgomes@dev.com'
-  );
-
-  proposals: Proposal[] = [
-    this.proposalOne,
-    this.proposalTwo,
-    this.proposalThree,
-  ];
+  getProposals() {
+    this.proposalService.getProposals().subscribe({
+      next: (proposals) => (this.proposals = proposals),
+      error: (error) => (this.errorMessage = <any>error),
+    });
+  }
 }
