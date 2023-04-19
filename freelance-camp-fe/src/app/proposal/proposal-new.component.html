@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-6">
       <div>
-        <form #proposalForm="ngForm" class="d-flex flex-column gap-3 h-100">
+        <form (ngSubmit)="createProposal(proposal)" #proposalForm="ngForm" class="d-flex flex-column gap-3 h-100">
           <div class="form-group">
             <label for="customer">Customer Name</label>
             <input
