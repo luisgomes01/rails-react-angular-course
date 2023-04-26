@@ -5,9 +5,23 @@ export interface FormFields {
   registrationErrors: string;
 }
 
-export const FORM_FIELDS: FormFields = {
-  email: "",
-  password: "",
-  password_confirmation: "",
-  registrationErrors: "",
+export interface AuthStatus {
+  loggedInStatus: string;
+  user: object;
+}
+
+export const getFormFieldsInitialState = (): FormFields => {
+  return {
+    email: "",
+    password: "",
+    password_confirmation: "",
+    registrationErrors: "",
+  }
+};
+
+export const getAuthStatusInitialState = (): AuthStatus => {
+  return {
+    loggedInStatus: "NOT_LOGGED_IN",
+    user: {},
+  }
 };

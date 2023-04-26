@@ -1,11 +1,26 @@
+import { useNavigate } from "react-router-dom";
 import Registration from "./auth/Registration";
+import Login from "./auth/Login";
 
-export default function Home() {
+interface Props {
+  loggedInStatus: string
+  handleLogin: (data: {user: object}) => void
+}
+
+export default function Home({loggedInStatus, handleLogin}: Props) {
+  const navigate = useNavigate()
+
+  function handleSuccessfulAuth(data: {user: object}) {
+    handleLogin(data)
+    navigate("/dashboard")
+  }
+
   return (
     <div>
-      <div>Home</div>
-      <div>Home</div>
-      <Registration />
+      <h1>Home</h1>
+      <h1>Status: {loggedInStatus}</h1>
+      <Registration handleSuccessfulAuth={handleSuccessfulAuth} />
+      <Login handleSuccessfulAuth={handleSuccessfulAuth} />
     </div>
   );
 }

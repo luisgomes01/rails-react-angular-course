@@ -3,29 +3,36 @@ import { getFormFieldsInitialState, FormFields } from "../../constants";
 import axios from "axios";
 
 interface Props {
-  handleSuccessfulAuth: (data: {user:object}) => void
+  handleSuccessfulAuth: (data: { user: object }) => void;
 }
 
-export default function Registration({handleSuccessfulAuth}: Props) {
-  const [formFields, setFormFields] = useState<FormFields>(getFormFieldsInitialState);
+export default function Login({ handleSuccessfulAuth }: Props) {
+  const [formFields, setFormFields] = useState<FormFields>(
+    getFormFieldsInitialState
+  );
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     const body = {
       user: {
         email: formFields.email,
         password: formFields.password,
-        password_confirmation: formFields.password_confirmation,
       },
     };
 
     axios
-      .post<{status: string, user: object}>("http://localhost:3001/registrations", body, {
-        withCredentials: true,
-      })
+      .post<{ status: string; user: object; logged_in: boolean }>(
+        "http://localhost:3001/sessions",
+        body,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
-        if (response.data.status === "created"){
-        handleSuccessfulAuth(response.data)
-      }})
+        if (response.data.logged_in) {
+          handleSuccessfulAuth(response.data);
+          console.log(response.data);
+        }
+      })
       .catch((error) => console.error("Registration error", error));
     event.preventDefault();
   }
@@ -57,16 +64,7 @@ export default function Registration({handleSuccessfulAuth}: Props) {
         onChange={handleChange}
         required
       />
-      <input
-        type="password"
-        name="password_confirmation"
-        placeholder="Password Confirmation"
-        value={formFields.password_confirmation}
-        onChange={handleChange}
-        required
-      />
-
-      <button type="submit">Register</button>
+      <button type="submit">Login</button>
     </form>
   );
 }
