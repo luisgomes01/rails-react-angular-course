@@ -59,7 +59,6 @@ function App() {
             element={
               <Home
                 handleLogin={handleLogin}
-                handleLogout={handleLogout}
                 loggedInStatus={authState.loggedInStatus}
               />
             }
@@ -68,7 +67,8 @@ function App() {
         <Routes>
           <Route
             path="/dashboard"
-            element={<Dasbhoard loggedInStatus={authState.loggedInStatus} />}
+            
+            element={<Dasbhoard handleLogout={handleLogout} loggedInStatus={authState.loggedInStatus} />}
           />
         </Routes>
       </BrowserRouter>

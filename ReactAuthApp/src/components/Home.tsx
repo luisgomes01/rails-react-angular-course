@@ -1,18 +1,17 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
+import { useEffect } from "react";
 
 interface Props {
   loggedInStatus: boolean;
   handleLogin: (data: { user: object }) => void;
-  handleLogout: () => void;
 }
 
 export default function Home({
   loggedInStatus,
   handleLogin,
-  handleLogout,
+ 
 }: Props) {
   const navigate = useNavigate();
 
@@ -21,22 +20,16 @@ export default function Home({
     navigate("/dashboard");
   }
 
-  function handleLogoutClick() {
-    axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
-      .then(() => {
-        handleLogout();
-      })
-      .catch((error) => {
-        console.log("logout error", error);
-      });
-  }
+  useEffect(() => {
+    if (loggedInStatus) {
+      navigate("/dashboard")
+    }
+  })
 
   return (
     <div>
       <h1>Home</h1>
       <h1>Status: {loggedInStatus.toString()}</h1>
-      <button onClick={() => handleLogoutClick()}>Logout</button>
       <Registration handleSuccessfulAuth={handleSuccessfulAuth} />
       <Login handleSuccessfulAuth={handleSuccessfulAuth} />
     </div>
