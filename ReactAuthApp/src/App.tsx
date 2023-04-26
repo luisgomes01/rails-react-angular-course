@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Home from "./components/Home";
@@ -21,7 +21,7 @@ function App() {
     });
   }
 
-  function checkLoginStatus() {
+  const checkLoginStatus = useCallback(() => {
     axios
       .get("http://localhost:3001/logged_in", { withCredentials: true })
       .then((response) => {
@@ -44,11 +44,11 @@ function App() {
         }
       })
       .catch((error) => console.error("check login error", error));
-  }
+  }, [authState.loggedInStatus])
 
   useEffect(() => {
     checkLoginStatus();
-  }, []);
+  }, [checkLoginStatus]);
 
   return (
     <div className="app">
