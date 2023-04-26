@@ -6,7 +6,7 @@ export interface FormFields {
 }
 
 export interface AuthStatus {
-  loggedInStatus: string;
+  loggedInStatus: boolean;
   user: object;
 }
 
@@ -21,7 +21,7 @@ export const getFormFieldsInitialState = (): FormFields => {
 
 export const getAuthStatusInitialState = (): AuthStatus => {
   return {
-    loggedInStatus: "NOT_LOGGED_IN",
+    loggedInStatus: false,
     user: {},
   }
 };
